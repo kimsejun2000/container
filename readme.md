@@ -71,81 +71,79 @@ root@b99ed1baaccc:/# ls
 컨테이너 내부에서 빠져나오는 방법은 두가지
 
 1. exit 명령 또는 ctrl + D 입력
-    
+
     ```bash
     root@b99ed1baaccc:/# exit
     ```
-    
+
     이 경우 빠져나오면서 컨테이너를 정지시킴
-    
+
     ![Untitled](images/Untitled%206.png)
-    
+
     ```bash
     sudo docker ps
     sudo docker ps -a
     ```
-    
+
     ![Untitled](images/Untitled%207.png)
-    
+
 2. ctrl + P, Q 입력
-    
+
     컨테이너를 정지하지 않고 빠져나옴
-    
-    컨테이너가 정지하지 않고 단순히 쉘에서만 빠져나오기 때문에 컨테이너 애플리케이션 개발 목적으로 
-    주로 사용
-    
+
+    컨테이너가 정지하지 않고 단순히 쉘에서만 빠져나오기 때문에 컨테이너 애플리케이션 개발 목적으로 주로 사용
+
     centOS7 이미지를 사용하는 컨테이너 예시
-    
+
     ```bash
     sudo docker pull centos:7
     ```
-    
+
     이미지가 정상적으로 받아졌는지 확인하기 위해 images 명령어로 확인
-    
+
     images 명령은 도커엔진에 존재하는 이미지의 목록을 출력
-    
+
     ```bash
     sudo docker images
     ```
-    
+
     ![Untitled](images/Untitled%208.png)
-    
+
     컨테이너를 생성할 때는 run 명령어가 아닌 create 명령어를 사용할 수도 있습니다.
-    
-    다음 명령어로 centos:7 이미지로 컨테이너를 생성합니다. 
-    
-    —name 옵션에는 컨테이너의 이름을 설정합니다. 
-    
+
+    다음 명령어로 centos:7 이미지로 컨테이너를 생성합니다.
+
+    —name 옵션에는 컨테이너의 이름을 설정합니다.
+
     여기서는 mycentos로 설정합니다.
-    
+
     ```bash
     sudo docker create -it --name mycentos centos:7
     ```
-    
+
     ![Untitled](images/Untitled%209.png)
-    
+
     그런데 이번에는 컨테이너 내부로 들어가지는 않습니다.
-    
+
     create 명령어는 컨테이너를 생성만 할 뿐 컨테이너로 들어가지 않기 때문입니다.
-    
+
     이번에는 docker start 명령어로 컨테이너를 시작하고 docker attach 명령어로 내부로 들어갑니다.
-    
+
     ```bash
     sudo docker start mycentos
     ```
-    
+
     ![Untitled](images/Untitled%2010.png)
-    
+
     ```bash
     sudo docker attach mycentos
     ```
-    
+
     ![Untitled](images/Untitled%2011.png)
-    
+
     이번에는 exit가 아닌 ctrl + P, Q를 입력해 컨테이너에서  빠져나옵니다.
-    
+
     ![Untitled](images/Untitled%2012.png)
-    
 
 지금까지 컨테이너를 생성하기 위해 run, create, start 명령어를 사용
 
@@ -153,7 +151,7 @@ run 명령은 pull, create, start명령어를 일괄적으로 실행한 후 atta
 
 하지만 create 명령어는 도커 이밎를 pull한 후에 컨테이너를 생성만 할 뿐 start attach를 실행하지는 않습니다.
 
-보통은 생성과 동시에 실행시키기 때문에 run을 주로 씁니다. 
+보통은 생성과 동시에 실행시키기 때문에 run을 주로 씁니다.
 
 ![Untitled](images/Untitled%2013.png)
 
@@ -162,7 +160,7 @@ run 명령은 pull, create, start명령어를 일괄적으로 실행한 후 atta
 docker ps 명령 : 정지되지 않은 컨테이너만 출력 ⇒ exit로 빠져나온 컨테이너는 출력되지 않음
                                                                            ⇒ ctrl + P,Q로 빠져나온 컨테이너는 출력
 
-docker ps -a 명령 : 정지된 컨테이너까지 포함해서 출력 
+docker ps -a 명령 : 정지된 컨테이너까지 포함해서 출력
 
 Exited : 정지상태, Up : 실행중인 상태
 
@@ -387,9 +385,9 @@ sudo docker inspect mycentos
 
 컨테이너에 자동으로 할당된 고유한 ID
 
-full id 중에 앞의 12자리만 표시됩니다. 
+full id 중에 앞의 12자리만 표시됩니다.
 
-full id는 docker inspect 명령으로 확인이 가능합니다. 
+full id는 docker inspect 명령으로 확인이 가능합니다.
 
 ```bash
 sudo docker inspect mycentos | grep Id
@@ -417,7 +415,7 @@ sudo docker run -it ubuntu:18.04 echo "hello world!"
 
 ### NAME
 
-컨테이너의 고유한 이름입니다. 컨테이너를 생성할 때 —name 옵션으로 이름을 설정하지 않은 경우 도커엔진이 임의로 형용사와 명사를 무작위로 조합해 이름을 설정하기 때문에 ubuntu 컨테이너의 이름이 예시에서는 sweet_pascal로 설정되어 있습니다. ID와 마찬가지로 고유해야 하며 중복되면 안되지만 docker rename 명령으로 변경은 가능합니다. 
+컨테이너의 고유한 이름입니다. 컨테이너를 생성할 때 —name 옵션으로 이름을 설정하지 않은 경우 도커엔진이 임의로 형용사와 명사를 무작위로 조합해 이름을 설정하기 때문에 ubuntu 컨테이너의 이름이 예시에서는 sweet_pascal로 설정되어 있습니다. ID와 마찬가지로 고유해야 하며 중복되면 안되지만 docker rename 명령으로 변경은 가능합니다.
 
 ```bash
 sudo docker rename jolly_benz my_ubuntu1804
@@ -427,11 +425,11 @@ sudo docker rename jolly_benz my_ubuntu1804
 
 # 컨테이너 삭제
 
-더 이상 사용하지 않는 컨테이너를 삭제할 때는 docker rm 명령어 사용 
+더 이상 사용하지 않는 컨테이너를 삭제할 때는 docker rm 명령어 사용
 
 한번 삭제한 컨테이너는 복구할 수 없으므로 삭제할 때는 신중을 기해야 합니다.
 
-그러나 위에서 생성한 CentOS, Ubuntu는 연습용이므로 지워도 문제는 없습니다. 
+그러나 위에서 생성한 CentOS, Ubuntu는 연습용이므로 지워도 문제는 없습니다.
 
 다음 명령을 통해 컨테이너를 삭제합니다.
 
@@ -447,7 +445,7 @@ sudo docker ps -a
 
 ![Untitled](images/Untitled%2017.png)
 
-이번에는 mycentos 컨테이너를 삭제합니다. 
+이번에는 mycentos 컨테이너를 삭제합니다.
 
 ```bash
 sudo docker rm mycentos
@@ -457,21 +455,20 @@ sudo docker rm mycentos
 
 에러가 났네요?!
 
-실행 중인 컨테이너는 삭제할 수 없으므로 
+실행 중인 컨테이너는 삭제할 수 없으므로
 
 1. 컨테이너를 정지 후 삭제
-    
+
     ```bash
     sudo docker stop mycentos
     sudo docker rm mycentos
     ```
-    
+
 2. 실행되던지 말던지 강제 삭제 옵션
-    
+
     ```bash
     sudo docker rm -f mycentos
     ```
-    
 
 ![Untitled](images/Untitled%2019.png)
 
@@ -504,9 +501,9 @@ sudo docker rm $(sudo docker ps -a -q)
 
 # 컨테이너를 외부에 노출
 
-컨테이너는 가상 머신과 마찬가지로 가상 IP주소를 할당받습니다. 
+컨테이너는 가상 머신과 마찬가지로 가상 IP주소를 할당받습니다.
 
-기본적으로 docker 는 컨테이너에 172.17.0.x의 IP를 순차적으로 할당합니다. 
+기본적으로 docker 는 컨테이너에 172.17.0.x의 IP를 순차적으로 할당합니다.
 
 컨테이너를 새롭게 생성한 후 ifconfig 명령어로 컨테이너의 네트워크 인터페이스를 확인합니다.
 
@@ -524,7 +521,7 @@ root@6f0c1e0f544b:/# ifconfig
 
 docker의 NAT IP인 172.17.0.2를 할당받은 eth0 인터페이스와 로컬 호스트인 lo인터페이스가 있습니다.
 
-아무런 설정을 하지 않았다면 이 컨테이너는 외부에서 접근이 불가능 - 해당 docker 가 설치된 host만 가능 
+아무런 설정을 하지 않았다면 이 컨테이너는 외부에서 접근이 불가능 - 해당 docker 가 설치된 host만 가능
 
 외부에 컨테이너의 에플리케이션을 노출하기 위해서는 eth0의 IP와 port를 호스트의 IP와 port에 바인딩해야 합니다.
 
@@ -534,20 +531,17 @@ docker의 NAT IP인 172.17.0.2를 할당받은 eth0 인터페이스와 로컬 �
 sudo docker run -it --name mywebserver -p 80:80  ubuntu:20.04 
 ```
 
--p 옵션 ; 컨테이너의 포트를 호스트의 포트와 바인딩해 연결할 수 있게 설정
+-p 옵션 : 컨테이너의 포트를 호스트의 포트와 바인딩해 연결할 수 있게 설정
 
-<aside>
-💡 -p 옵션을 통해 port forwarding 하는 법
-[host port]:[container port]
-예 : 7777:80 ⇒ 호스트의 7777포트와 80포트
-
-호스트의 특정 ip를 사용해서 port forwarding 가능 
-예 : 192.168.0.100:7777:80
-
-port forwarding을 여러개 하고 싶습니다. ⇒ -p 옵션을 여러개 쓰세요
-예 : sudo docker run -it -p 3306:3306 -p 192.168.0.100:7777:80 ubuntu:20.04
-
-</aside>
+> 💡 **-p 옵션을 통해 port forwarding 하는 법**  
+> [host port]:[container port]  
+> 예 : 7777:80 ⇒ 호스트의 7777포트와 80포트  
+>
+> 호스트의 특정 ip를 사용해서 port forwarding 가능  
+> 예 : 192.168.0.100:7777:80  
+>
+> port forwarding을 여러개 하고 싶습니다. ⇒ -p 옵션을 여러개 쓰세요  
+> 예 : `sudo docker run -it -p 3306:3306 -p 192.168.0.100:7777:80 ubuntu:20.04`
 
 ```bash
 root@1f22a7d7162d:/# apt update
@@ -572,18 +566,18 @@ sudo docker run --name my-apache-server -p 8080:80 httpd
 
 ![Untitled](images/Untitled%2025.png)
 
-이제 8080포트로 접속해보겠습니다. 
+이제 8080포트로 접속해보겠습니다.
 
 ![Untitled](images/Untitled%2026.png)
 
 엇 접속이 안됩니다. ㅠㅠ
 
 - 왜 접속이 안될까요?
-    
-    AWS ec2의 Security Group(SG)을 열지 않았습니다. 
-    
+
+    AWS ec2의 Security Group(SG)을 열지 않았습니다.
+
     연결 된 SG의 inbound rule을 port TCP 80, 0.0.0.0/0에 대해 추가합니다.
-    
+
 
 접속이 되는 것을 볼 수 있습니다.
 
@@ -591,11 +585,11 @@ sudo docker run --name my-apache-server -p 8080:80 httpd
 
 호스트의 IP의 port를 컨테이너의 IP와 port로 연결한다는 개념은 매우 중요합니다.
 
-아파치 웹서버는 172 대역을 가진 컨테이너의 NAT IP의 80번 포트로 서비스하므로 여기에 접근하려면 172.17.0.x:80의 주소로 접근해야 합니다. 
+아파치 웹서버는 172 대역을 가진 컨테이너의 NAT IP의 80번 포트로 서비스하므로 여기에 접근하려면 172.17.0.x:80의 주소로 접근해야 합니다.
 
 그러나 docker의 port-forward 옵션인 -p를 써서 호스트와 컨테이너를 연결했으므로 호스트의 IP와 포트를 통해 172.17.0.x.:80으로 접근할 수 있습니다.
 
-순서를 정리하면 다름과 같습니다. 
+순서를 정리하면 다름과 같습니다.
 
 ![Untitled](images/Untitled%2028.png)
 
@@ -605,16 +599,16 @@ sudo docker run --name my-apache-server -p 8080:80 httpd
 
 # 컨테이너 application 구축
 
-대부분의 서비스는 단일 프로그램으로 동작하지 않습니다. 
+대부분의 서비스는 단일 프로그램으로 동작하지 않습니다.
 
-특히나 요즘처럼 MSA의 중요성을 이야기하는 시대에는 더욱 단일 프로그램으로 동작하는 서비스를 
+특히나 요즘처럼 MSA의 중요성을 이야기하는 시대에는 더욱 단일 프로그램으로 동작하는 서비스를
 찾기 힘듭니다.
 
 최소 DB정도는 분리하게 되죠
 
-이런 서비스를 containerize할 때 여러 개의 애플리케이션을 한 컨테이너에 설치할 수도 있습니다. 
+이런 서비스를 containerize할 때 여러 개의 애플리케이션을 한 컨테이너에 설치할 수도 있습니다.
 
-그러나 컨테이너에 애플리케이션을 하나만 동작시키면 컨테이너 간의 독립성을 보장함과 동시에 애플리케이션의 버전 관리, 소스코드 모듈화 등이 더욱 쉬워집니다. 
+그러나 컨테이너에 애플리케이션을 하나만 동작시키면 컨테이너 간의 독립성을 보장함과 동시에 애플리케이션의 버전 관리, 소스코드 모듈화 등이 더욱 쉬워집니다.
 
 이 구조는 docker community와 docker 공식 문서에서도 권장하는 구조입니다.
 
@@ -623,16 +617,16 @@ docker는 one container, one process가 그들의 철학이기 떄문이죠
 다음은 웹 서버와 DB의 예시입니다.
 
 1. 먼저 DB 컨테이너를 생성합니다.
-    
+
     ```bash
     sudo docker run -d --name wordpressdb \
-     -e MYSQL_ROOT_PASSWORD=password \
-     -e MYSQL_DATABASE=wordpress \
+        -e MYSQL_ROOT_PASSWORD=password \
+        -e MYSQL_DATABASE=wordpress \
     mysql:5.7
     ```
-    
+
 2. 그 다음 워드프레스 컨테이너를 생성합니다.
-    
+
     ```bash
     sudo docker run -d --name wordpress \
     -e WORDPRESS_DB_HOST=mysql \
@@ -642,7 +636,6 @@ docker는 one container, one process가 그들의 철학이기 떄문이죠
     -p 80 wordpress
     
     ```
-    
 
 docker ps 명령 결과의 PORTS 컬럼을 확인해보겠습니다.
 
@@ -671,82 +664,81 @@ sudo docker ps
 - 컨테이너 내부의 환경변수를 설정
 - containerized application은 환경변수에서 값을 가져와 쓰는 경우가 많으므로 자주 사용하는 옵션 중 하나입니다. mysql 컨테이너를 생성할 떄 설정한 -e 옵션의 값을 살펴보면 mysql 컨테이너의 환경변수로 어떤 것이 설정됐는지 알 수 있습니다.
 - mysql 환경변수
-    
+
     ```bash
     -e MYSQL_ROOT_PASSWORD=password
     -e MYSQL_DATABASE=wordpress
     ```
-    
+
 - 환경변수 확인
-    
+
     리눅스에서 환경변수를 확인하는 가장 간단한 방법 : echo
-    
+
     ```bash
     echo ${ENV_NAME}
     ```
-    
-    이걸 확인하려면 컨테이너의 쉘을 사용해야 하는데 mysql과 wordpress는 attach 명령은 
+
+    이걸 확인하려면 컨테이너의 쉘을 사용해야 하는데 mysql과 wordpress는 attach 명령은
     의미가 없습니다.
-    
+
     attach 쓰면 그냥 log만 나옵니다.
-    
+
     ![Untitled](images/Untitled%2031.png)
-    
-    그래서 exec 명령으로 컨테이너 내부의 bash쉘을 실행시켜야 합니다. 
-    
+
+    그래서 exec 명령으로 컨테이너 내부의 bash쉘을 실행시켜야 합니다.
+
     ```bash
     sudo docker exec -it wordpressdb /bin/bash
     ```
-    
+
     ![Untitled](images/Untitled%2032.png)
-    
 
 —link 옵션
 
 - 컨테이너 내부 IP를 알 필요 없이 항상 컨테이너에 alias로 접근하도록 설정
 - 위에서 생성한 워드프레스 웹 서버 컨테이너는 —link 옵션의 값에서 wordpressdb 컨테이너를 mysql이라는 이름으로 설정했습니다.
-    
+
     ```bash
     --link wordpressdb:mysql
     ```
-    
-    - 워드프레스 웹 서버 컨테이너는 wordpressdb의 IP를 몰라도 mysql이라는
-     호스트명으로 접근할 수 있게 됨
+
+    - 워드프레스 웹 서버 컨테이너는 wordpressdb의 IP를 몰라도 mysql이라는 호스트명으로 접근할 수 있게 됨
+
     - 다음 명령으로 확인
-        
+
         ```bash
         sudo docker exec wordpress curl mysql:3306
         ```
-        
+
 - 실행 순서의 의존성도 정의
-    
-    wordpress, wordpressdb 모두 컨테이너 중지를 합니다. 
-    
+
+    wordpress, wordpressdb 모두 컨테이너 중지를 합니다.
+
     ```bash
     sudo docker stop wordpress wordpressdb
     ```
-    
+
     ![Untitled](images/Untitled%2033.png)
-    
+
     그리고 wordpress를 다시 실행시키면
-    
+
     ```bash
     sudo docker start wordpress
     ```
-    
+
     ![Untitled](images/Untitled%2034.png)
-    
-    에러가 납니다. 
-    
+
+    에러가 납니다.
+
 - 컨테이너 간에 이름으로 서로를 찾을 수 있게 도와주지만 deprecated 된 옵션
 - docker bridge network를 사용하면 —link 옵션과 동일한 기능을 더욱 손쉽게 사용할 수 있으므로 bridge network를 사용하는 것을 권장
 
 # 도커 볼륨
 
-도커 이미지로 컨태이너를 생성하면 이미지는 readonly이 되며 컨테이너의 변경 사항만 별도로 저장해서 
+도커 이미지로 컨태이너를 생성하면 이미지는 readonly이 되며 컨테이너의 변경 사항만 별도로 저장해서
 각 컨테이너의 정보를 보존
 
-위에서 생성했던 mysql 컨테이너는 mysql:5.7이라는 이미지로 생성됐지만 워드프레스 블로그를 위한 
+위에서 생성했던 mysql 컨테이너는 mysql:5.7이라는 이미지로 생성됐지만 워드프레스 블로그를 위한
 DB등의 정보는 컨테이너가 갖고 있습니다.
 
 ![Untitled](images/Untitled%2035.png)
@@ -793,7 +785,7 @@ sudo docker run -d \
 wordpress
 ```
 
-워드프레스 컨테이너에 -p 옵션으로 컨테이너의 80포트를 외부에 노출했으므로 
+워드프레스 컨테이너에 -p 옵션으로 컨테이너의 80포트를 외부에 노출했으므로
 docker ps명령어에서 확인한 wordpress_hostvolume 컨테이너의 호스트 포트로 워드프레스 컨테이너에 접속
 
 -v 옵션
@@ -822,7 +814,7 @@ ls ~/wordpress_db/
 
 ![Untitled](images/Untitled%2036.png)
 
-~/wordpress_db:/var/lib/mysql 이 둘은 동기화 되는 개념이 아니라 그냥 같은 디렉토리 
+~/wordpress_db:/var/lib/mysql 이 둘은 동기화 되는 개념이 아니라 그냥 같은 디렉토리
 
 ![Untitled](images/0e5cc43f-10ed-4808-a3a2-5bfeb232cb3a.png)
 
@@ -851,26 +843,25 @@ root@2b574c6896cc:/# cat hello && cat hello2
 호스트와 컨테이너 양쪽 모두에 동일한 파일이 있을 경우
 
 1. alicek106/volume_test이미지의 /home/testdir_2 디렉토리 내용 확인
-    
+
     ```bash
     sudo docker run -it --name volume_dummy \
     alicek106/volume_test \
     ls /home/testdir_2/
     ```
-    
+
     ![Untitled](images/Untitled%2038.png)
-    
+
 2. 이제 -v 옵션을 사용해서 컨테이너를 생성
-    
+
     ```bash
     sudo docker run -it --name volume_overide \
     -v ~/wordpress_db:/home/testdir_2 \
     alicek106/volume_test \
     ls /home/testdir_2/
     ```
-    
+
     ![Untitled](images/Untitled%2039.png)
-    
 
 공유한 컨테이너 디렉토리자체가 호스트의 디렉토리 내용으로 덮어씌워짐
 
@@ -915,8 +906,7 @@ sudo docker volume create --name myvolume
 이 볼륨은 로컬호스트에 저장되며 도커엔진에 의해 생성되고 삭제
 
 - **Volume plugins**
-    
-    
+
     | **Plugin** | **Description** |
     | --- | --- |
     | [Azure File Storage plugin](https://github.com/Azure/azurefile-dockervolumedriver) | Lets you mount Microsoft [Azure File Storage](https://azure.microsoft.com/blog/azure-file-storage-now-generally-available/) shares to Docker containers as volumes using the SMB 3.0 protocol. [Learn more](https://azure.microsoft.com/blog/persistent-docker-volumes-with-azure-file-storage/). |
@@ -962,7 +952,7 @@ ubuntu:20.04
 root@c54946a5664c:/# echo hello, volume! >> /root/volume
 ```
 
-그 다음 같은 볼륨을 마운트하는 컨테이너를 하나 더 만들어서 확인해봅니다. 
+그 다음 같은 볼륨을 마운트하는 컨테이너를 하나 더 만들어서 확인해봅니다.
 
 ```bash
 sudo docker run -it --name myvolume_2 \
@@ -1059,7 +1049,7 @@ cat /root/volume
 - 도커는 컨테이너에 내부 IP를 순차적으로 할당하며, 이 IP는 컨테이너를 재시작할 때마다 변경될 수 있음
 - 이 내부 IP는 도커가 설치된 호스트 ⇒ 내부 망에서만 쓸 수 있는 IP이므로 외부와 연결될 필요가 있음
 - 이 과정은 컨테이너를 시작할 때마다 호스트에 veth…라는 네트워크 인터페이스를 생성함으로써 이뤄짐
-- 각 컨테이너에 외부와의 네트워크를 제공하기 위해 가상 네트워크 인터페이스를 호스트에 생성 
+- 각 컨테이너에 외부와의 네트워크를 제공하기 위해 가상 네트워크 인터페이스를 호스트에 생성
 이름은 veth로 시작
 - veth 인터페이스는 사용자가 직접 생성할 필요는 없으며 컨테이너가 생성될 때 도커 엔진이 자동으로 생성
 

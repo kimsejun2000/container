@@ -135,7 +135,7 @@ github처럼 pull과 push만 하면 되기 때문에 간단하게 사용할 수 
 
 또다른 방법은 사설 레지스트리 사용하는 것
 
-⇒ 직접 운용해도 좋지만 클라우드의 레지스트리를 이용하면 좋습니다. 
+⇒ 직접 운용해도 좋지만 클라우드의 레지스트리를 이용하면 좋습니다.
 
 ## Dockerhub
 
@@ -249,8 +249,8 @@ vi lotto.html
   <title>lotto</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css?family=Allerta|Bungee" rel="stylesheet">
-	<style type="text/css">
-		* {
+  <style type="text/css">
+    * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -471,7 +471,7 @@ article {
   line-height: 210px;
   border: 4px solid #998100;
 }
-	</style>
+  </style>
 </head>
 
 <body>
@@ -493,9 +493,9 @@ article {
       </div>
     </article>
   </section>
-	
-	<script>
-		document.addEventListener("DOMContentLoaded", function(e){
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function(e){
     var body = document.querySelector("body");
     var section = document.querySelector("section");
     var articleLotto = document.querySelector(".lotto");
@@ -505,7 +505,7 @@ article {
     var drawnNums = [];
     var chosenByMachine = [];
     function createNumberBoard(number){
-    	console.log("I work");
+      console.log("I work");
         var board = document.createElement("div");
         board.classList.add("board");
         articleLotto.appendChild(board);
@@ -530,7 +530,7 @@ article {
     function drawNumbers(){
         //boardEls.forEach(boardEl => boardEl.addEventListener("click", selectNums));
         for (var i = 0; i<boardEls.length; i++){
-        	boardEls[i].addEventListener("click", selectNums);
+          boardEls[i].addEventListener("click", selectNums);
         }
         function selectNums(){
             var number = parseInt(this.dataset.number, 10);
@@ -544,8 +544,8 @@ article {
 
                 //boardEls.forEach(boardEl => boardEl.addEventListener("click", makeAlert));
                 for ( var i = 0; i<boardEls.length; i++){
-                	boardEls[i].removeAttribute("data-number");
-                	boardEls[i].addEventListener("click", makeAlert);
+                  boardEls[i].removeAttribute("data-number");
+                  boardEls[i].addEventListener("click", makeAlert);
                 }
                 var startDraw = document.querySelector(".startDraw");
                 if(startDraw === null){ // you have to prevent creating the button if it is already there!
@@ -565,15 +565,15 @@ article {
     drawNumbers();
 
     function makeAlert() {
-    	var alertBox = document.createElement("div");
-    	board.appendChild(alertBox);
-    	alertBox.classList.add("alertBox");
-    	alertBox.textContent = "you already chose 6!";
-    	
-    	setTimeout(function() {
-    		alertBox.parentNode.removeChild(alertBox);
-    	}, 1500);
-    	
+      var alertBox = document.createElement("div");
+      board.appendChild(alertBox);
+      alertBox.classList.add("alertBox");
+      alertBox.textContent = "you already chose 6!";
+    
+      setTimeout(function() {
+        alertBox.parentNode.removeChild(alertBox);
+      }, 1500);
+
     }
 
     function machineDraw(){
@@ -596,24 +596,24 @@ article {
     //machineDraw();
 
     function createButtonForMachineDraw(){
-    	var startDraw = document.createElement("button");
-    	startDraw.classList.add("startDraw");
-    	section.appendChild(startDraw);
-    	startDraw.textContent ="release the balls";
-    	startDraw.addEventListener("click", machineDraw);
-    	startDraw.addEventListener("click", compareArrays);
-    	
+      var startDraw = document.createElement("button");
+      startDraw.classList.add("startDraw");
+      section.appendChild(startDraw);
+      startDraw.textContent ="release the balls";
+      startDraw.addEventListener("click", machineDraw);
+      startDraw.addEventListener("click", compareArrays);
+      
     }
 
     function compareArrays(){     
         for( var i =0; i<balls.length; i++) {
             balls[i].textContent = chosenByMachine[i];
             (function() {
-            	var j = i;
-            	var f = function(){
-            		balls[j].classList.remove("invisible");
-            	}
-            	setTimeout(f, 1000*(j+1));
+              var j = i;
+              var f = function(){
+                balls[j].classList.remove("invisible");
+              }
+              setTimeout(f, 1000*(j+1));
             })();           
         }
         var common =[];
@@ -650,8 +650,8 @@ article {
                 }
             }
         setTimeout(function() {
-        	makeComebackBtn();
-        	document.querySelector(".resultsBoard").classList.remove("invisible"); //well, you cannot acces this outside the code
+          makeComebackBtn();
+          document.querySelector(".resultsBoard").classList.remove("invisible"); //well, you cannot acces this outside the code
         }, 8000);
         generateResult();       
     }
@@ -666,7 +666,7 @@ article {
     
 
 })
-	</script>
+  </script>
 </body>
 
 </html>
