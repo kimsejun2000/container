@@ -608,7 +608,7 @@ sudo docker run --name my-apache-server -p 8080:80 httpd
 대부분의 서비스는 단일 프로그램으로 동작하지 않습니다. 
 
 특히나 요즘처럼 MSA의 중요성을 이야기하는 시대에는 더욱 단일 프로그램으로 동작하는 서비스를 
-찾기 힘듭니다.1
+찾기 힘듭니다.
 
 최소 DB정도는 분리하게 되죠
 
@@ -784,10 +784,12 @@ mysql:5.7
 
 ```bash
 sudo docker run -d \
+-e WORDPRESS_DB_HOST=mysql \
+-e WORDPRESS_DB_USER=root \
 -e WORDPRESS_DB_PASSWORD=password \
 --name wordpress_hostvolume \
 --link wordpressdb_hostvolume:mysql \
--p 80 \
+-p 80:80 \
 wordpress
 ```
 
